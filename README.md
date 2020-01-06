@@ -4,7 +4,7 @@ Simple PHP MVC framework for php7.2+
 
 Has sample exples of user authenticaton, and registering/editing users
 
-#installation for localhost
+# installation for localhost
 1) Make folder in root called "apf"   you should be able to access it throughL http://www.127.0.0.1/apf/
 
 2) Upload the sql file to your database
