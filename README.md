@@ -2,6 +2,7 @@
 
 Simple PHP MVC framework for php7.2+
 
+
 Has sample examples of user authenticaton, and registering/editing users
 
 # installation for localhost
@@ -14,7 +15,7 @@ Has sample examples of user authenticaton, and registering/editing users
 
 To add a new webpage, go to application/controllers and add new controller, or add a function to an existing one.
 
-Then edit application/routes.php  and add your new route info
+Then edit application/routes.php  and add your new route info 
 
 
 
