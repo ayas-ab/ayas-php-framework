@@ -36,10 +36,9 @@ class Ip
     {
 
         $a = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.self::get_client_ip()));
-        foreach ($a as $key=>$value)
-        {
-            $a[$key] = Input::filter_text($value);
-        }
+       
+           $a = Input::filter_text($a);
+       
         return  $a;
         
     }
