@@ -8,7 +8,7 @@
 
 		<div class="col-md-8 offset-md-2 mt-2">
 			<div class="card">
-				<h5 class="card-header">List of registred users</h5>
+				<h5 class="card-header">List of registered users</h5>
 				<div class="card-body">
 				
 				     <table class="table table-striped">
