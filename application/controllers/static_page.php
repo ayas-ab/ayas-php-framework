@@ -2,7 +2,7 @@
 
 
 
-// static pages here that do not require like home page, about us, contact, 404 error etc.
+// static pages here like home page, about us, contact, 404 error etc.
 namespace Controllers;
 
 use Core\Controller;
