@@ -1,0 +1,18 @@
+#!/usr/bin/php
+<?php
+//Run this file in cli like this: php example name someone age 100
+include_once('base/cli_base.php');
+$cli = new cli_base($argv);
+/*
+echo "type in your name: ";
+
+$name = $cli->next();
+
+echo "\nhello ".$name."\n";
+*/
+if ($cli->hasArg('name'))
+{
+	echo "Name: ".$cli->displayRed($cli->argValue('name'))."\n";
+	echo "Age: ".$cli->displayBlue($cli->argValue('age'), 5)."\n";
+}
+
