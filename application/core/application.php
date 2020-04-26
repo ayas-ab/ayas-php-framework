@@ -34,8 +34,6 @@ class application
             header('location: ' . BASE_URL . $_SESSION['lang'] . '/' . Route::get_controller_by_name($this->controller)->url . '/', TRUE, 301);
         } else {
 
-         
-
             global $server_existing_langs;
             // setting the language.
             $lang_detected = $this->check_lang($server_existing_langs, $url);
@@ -137,41 +135,43 @@ class application
         return false;
     }
 
+    
+    //updated check routing
     public function check_route(string $url)
     {
+
+        $url = explode("/", $url);
+        $params = [];
+
         foreach (\Core\Route::$routes as $r) {
 
-            // if(preg_match("#^$r->url$#", $url, $a))
-            // {
-            // var_dump($a);
+            $get_r_elements = explode("/", $r->url);
+                  
+              if(count(array_intersect($url, $get_r_elements)) == count($get_r_elements))
+              {
+                   if(sizeof($url) > sizeof($get_r_elements))
+                   {
+                      $size = (sizeof($url) - sizeof($get_r_elements))*-1;
 
-            // }
+                       $params = array_splice($url, $size, 1);
 
-            $sub_url = substr($url, 0, strlen($r->url));
+                   }
 
-            if (($r->url == $sub_url)) {
+                   $old_url = implode("/", $url);
+                   return [$r, $params];
 
-                $parse_params = substr($url, strlen($r->url));
+                   
+              }
 
-                if (substr($parse_params, 0, 1) == '/') {
-                    $parse_params = substr($parse_params, 1);
-                }
+             }
 
-                $params = explode('/', $parse_params);
-
-                return [
-                    $r,
-                    $params
-                ];
-
-                $sub_url = null;
-            }
-        }
-        return [
+return [
             null,
             Array()
         ];
-    }
+
+
+}
 
     public function load_routes()
     {
