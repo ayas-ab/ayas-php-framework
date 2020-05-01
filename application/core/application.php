@@ -136,7 +136,7 @@ class application
     }
 
     
- public function check_route(string $url)
+public function check_route(string $url)
     {
         $url = explode("/", $url);
         $params = [];
