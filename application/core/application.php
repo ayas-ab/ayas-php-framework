@@ -136,57 +136,62 @@ class application
     }
 
     
-    //updated check routing
-   public function check_route(string $url)
+ public function check_route(string $url)
     {
-
         $url = explode("/", $url);
         $params = [];
-
+        $matching_controller = null;
         foreach (\Core\Route::$routes as $r) {
 
             $get_r_elements = explode("/", $r->url);
-            
-            
-         
-            
-            
-                $exists = true;
-                foreach($get_r_elements as $key => $value)
-                {
-                    
-                    if($value != $url[$key])
-                    {
-                        
+
+            $exists = true;
+            if (count($url) >= count($get_r_elements)) {
+                foreach ($get_r_elements as $key => $value) {
+
+                    if ($value != $url[$key]) {
+
                         $exists = false;
-                      
                     }
                 }
-                
-                if($exists)
-                {
-                    if(sizeof($url) > sizeof($get_r_elements))
-                                       {
-                                          $size = (sizeof($url) - sizeof($get_r_elements))*-1;
-                        
-                                           $params = array_splice($url, $size, 1);
-                        
-                                        }
-                                        
-                                        return [$r, $params];
+
+                if ($exists) {
+
+                    if (sizeof($url) > sizeof($get_r_elements)) {
+                        $size = (sizeof($url) - sizeof($get_r_elements)) * - 1;
+
+                        $params = array_splice($url, $size, 1);
+                    }
+
+                    if ($matching_controller != null) {
+                        if (strlen($matching_controller['controller_object']->url) < strlen($r->url)) {
+                            $params = [];
+                            if (sizeof($url) > sizeof($get_r_elements)) {
+                                $size = (sizeof($url) - sizeof($get_r_elements)) * - 1;
+
+                                $params = array_splice($url, $size, 1);
+                            }
+
+                            $matching_controller = [
+                                'controller_object' => $r,
+                                'params' => $params
+                            ];
+                        }
+                    } else {
+                        $matching_controller = [
+                            'controller_object' => $r,
+                            'params' => $params
+                        ];
+                    }
                 }
-                 
-          
-               
-             }
+            }
+        }
 
-return [
-            null,
-            Array()
+        return [
+            $matching_controller['controller_object'],
+            $matching_controller['params']
         ];
-
-
-}
+    }
 
     public function load_routes()
     {
